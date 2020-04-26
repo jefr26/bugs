@@ -93,20 +93,18 @@ $(function() {
 	discussion.find('li .save').live('click', function(){
 		var id = $(this).closest('.comment').attr('id');
 
-		var contenu = CachonsEditor(id);
-		if (contenu == false) { contenu = discussion.find('#' + id + ' textarea').val(); }
 		$('#' + id + ' textarea').attr('disabled', 'disabled');
+
 		saving_toggle();
 
 		$.post(current_url + '/edit_comment', {
-			body: contenu,
+			body: discussion.find('#' + id + ' textarea').val(),
 			id: id,
 			csrf_token: $('input[name=csrf_token]').val()
 		}, function(data){
 			$('#' + id + ' textarea').removeAttr('disabled');
 			$('#' + id + ' .comment-edit').hide();
-//			$('#' + id + ' .issue').html(data).show();
-			$('#' + id + ' .issue').html(contenu).show();
+			$('#' + id + ' .issue').html(data).show();
 			saving_toggle();
 		});
 

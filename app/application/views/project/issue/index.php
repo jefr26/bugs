@@ -1,7 +1,6 @@
 <?php 
 $config_app = require path('public') . 'config.app.php';  
 if(!isset($config_app['PriorityColors'])) { $config_app['PriorityColors'] = array("black","Orchid","Cyan","Lime","orange","red"); }
-$url =\URL::home();
 ?>
 <h3>
 	<a href="<?php echo Project::current()->to('issue/new'); ?>" class="newissue"><?php echo __('tinyissue.new_issue'); ?></a>
@@ -29,8 +28,8 @@ $url =\URL::home();
 		////Here we show the progress bar
 		if (is_object($Etat)) {
 			echo '<div class="Percent">';
-			echo '<div style="background-color: green; position: absolute; top: 0; left: 0; width: '.($Etat->weight).'%; height: 100%; text-align: center; line-height:20px;" />'.$Etat->weight.'%</div>';
-			echo '<div style="background-color: gray; position: absolute;  top: 0; left: '.$Etat->weight.'%; width: '.(100-$Etat->weight).'%; height: 100%; text-align: center; line-height:20px;" />'.(100-$Etat->weight).'%</div>';
+			echo '<div style="background-color: #84b184; position: absolute; top: 0; left: 0; width: '.($Etat->weight).'%; height: 2rem; border-radius: 3px; text-align: center; line-height:3;" />'.$Etat->weight.'%</div>';
+			echo '<div style="background-color: #dcdcdc; position: absolute;  top: 0; left: '.$Etat->weight.'%; width: '.(100-$Etat->weight).'%; height: 2rem; border-radius: 3px; text-align: center; line-height:3;" />'.(100-$Etat->weight).'%</div>';
 			echo '</div>';
 		}
 
@@ -50,8 +49,8 @@ $url =\URL::home();
 		////Here we show to progress bar
 		echo __('tinyissue.countdown').' ('.__('tinyissue.day').'s) : ';
 		echo '<div class="Percent">';
-		echo '<div style="background-color: '.$DurColor.'; position: absolute; top: 0; left: 0; width: '.(($DurRelat <= 100) ? $DurRelat : 100).'%; height: 100%; text-align: center; line-height:20px;" />'.((($DurRelat  >= 100)) ? $Dur.' / '.@$issue->duration : $Dur).'</div>';
-		if ($DurRelat < 100) {  echo '<div style="background-color: gray; position: absolute;  top: 0; left: '.$DurRelat.'%; width: '.(100-$DurRelat).'%; height: 100%; text-align: center; line-height:20px;" />'.$issue->duration.'</div>'; }
+		echo '<div style="background-color: '.$DurColor.'; position: absolute; top: 0; left: 0; width: '.(($DurRelat <= 100) ? $DurRelat : 100).'%; height: 2rem; text-align: center; line-height:3; border-radius: 3px;" />'.((($DurRelat  >= 100)) ? $Dur.' / '.@$issue->duration : $Dur).'</div>';
+		if ($DurRelat < 100) {  echo '<div style="background-color: #dcdcdc; position: absolute;  top: 0; left: '.$DurRelat.'%; width: '.(100-$DurRelat).'%; height: 2rem; text-align: center; line-height:3; border-radius: 3px;" />'.$issue->duration.'</div>'; }
 		echo '</div>';
 
 
@@ -96,11 +95,9 @@ $url =\URL::home();
 			</div>
 		</li>
 
-		<?php 
-			foreach($issue->activity() as $activity) {
-				echo (strlen($activity) > 1) ? $activity : '';
-			}
-		?>
+		<?php foreach($issue->activity() as $activity): ?>
+			<?php echo $activity; ?>
+		<?php endforeach; ?>
 	</ul>
 	<div id="div_currentlyAssigned_name" class="topbar"></div>
 
@@ -159,7 +156,6 @@ $url =\URL::home();
 			<p>
 				<textarea name="comment" id="textarea_comment_0" style="width: 98%; height: 90px;"></textarea>
 				<!-- New options in the form : percentage of work done after this ticket  -->
-				<br />
 				<span style="text-align: left; width: 50%;">
 				<?php 
 					$percent = ((is_object($Etat)) ? (($Etat->weight == 100) ? 91 : $Etat->weight+1) : 10 );
@@ -266,7 +262,7 @@ function IMGupload(input) {
 	var IDcomment = 'comment' + new Date().getTime();
 	var fil = document.getElementById("file_upload").files[0];
 	var ext = fil['name'].substring(fil['name'].lastIndexOf('.') + 1).toLowerCase();
-	var img = "<?php echo $url; ?>app/assets/images/icons/file_01.png?"; 
+	var img = "../../../../app/assets/images/icons/file_01.png?"; 
 	var xhttpCHK = new XMLHttpRequest();
 	var CheckPage = '<?php echo $_SERVER['REQUEST_URI']; ?>/checkExt?ext=' + ext;
 	xhttpCHK.onreadystatechange = function() {
@@ -274,9 +270,9 @@ function IMGupload(input) {
 			var formdata = new FormData();
 			formdata.append("Loading", fil);
 			if (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg") { 
-				img = "<?php echo $url; ?>uploads/" + fil['name'];
+				img = "../../../../uploads/" + fil['name'];
 			} else if (xhttpCHK.responseText == 'yes' ) {
-				img = "<?php echo $url; ?>app/assets/images/upload_type/" + ext + ".png";
+				img = "../../../../app/assets/images/upload_type/" + ext + ".png";
 			}
 			var xhttpUPLD = new XMLHttpRequest();
 			var NextPage = '<?php echo $_SERVER['REQUEST_URI']; ?>/upload?Nom=' + fil['name'];
@@ -380,11 +376,12 @@ function Reassignment (Project, Prev, Suiv, Issue) {
 	xhttpASGMT.send(); 
 }
 
+
 <?php
 	$wysiwyg = Config::get('application.editor');
 	if (trim(@$wysiwyg['directory']) != '') {
 		if (file_exists($wysiwyg['directory']."/Bugs_code/showeditor.js")) {
-			include $wysiwyg['directory']."/Bugs_code/showeditor.js"; 
+			include_once $wysiwyg['directory']."/Bugs_code/showeditor.js"; 
 			if ($wysiwyg['name'] == 'ckeditor') {
 				echo "
 				setTimeout(function() {
@@ -395,4 +392,5 @@ function Reassignment (Project, Prev, Suiv, Issue) {
 		} 
 	} 
 ?>
+	//setTimeout(function() { var debut = LitTags (); } , 497);
 </script>

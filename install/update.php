@@ -9,7 +9,7 @@
 //                                                                                       //
 //                                                                                       //
 //                                   Voir plutôt                                         //
-//                  app/application/views/administration/update/*.php                     //
+//                  app/application/view/administration/update/*.php                     //
 //                                                                                       //
 //                                                                                       //
 ///////////////////////////////////////////////////////////////////////////////////////////

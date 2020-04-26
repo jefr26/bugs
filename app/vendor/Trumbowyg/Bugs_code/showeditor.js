@@ -22,7 +22,3 @@ setTimeout(function() {
 
 function AffichonsEditor(id) {
 }
-
-function CachonsEditor(id) {
-	return false;
-}

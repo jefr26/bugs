@@ -24,7 +24,7 @@ $Password["pt-BR"] = 'Mot de passe';
 $Password["it"] = 'Password';
 
 $Remember["en"] = 'Remember me';
-$Remember["es"] = 'Me reconocer';
+$Remember["es"] = 'Recordarme';
 $Remember["fr"] = 'Se rappeler de moi';
 $Remember["pt-BR"] = 'Se rappeler de moi';
 $Remember["it"] = 'Ricordami';

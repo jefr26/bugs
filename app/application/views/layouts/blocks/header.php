@@ -4,20 +4,8 @@
 		<meta charset="utf-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="apple-touch-icon" sizes="57x57" href="<?php echo URL::to_asset('/apple-touch-icon-57x57.png'); ?>">
-		<link rel="apple-touch-icon" sizes="114x114" href="<?php echo URL::to_asset('/apple-touch-icon-114x114.png');?>">
-		<link rel="apple-touch-icon" sizes="72x72" href="<?php echo URL::to_asset('/apple-touch-icon-72x72.png');?>">
-		<link rel="apple-touch-icon" sizes="144x144" href="<?php echo URL::to_asset('/apple-touch-icon-144x144.png');?>">
-		<link rel="apple-touch-icon" sizes="60x60" href="<?php echo URL::to_asset('/apple-touch-icon-60x60.png');?>">
-		<link rel="apple-touch-icon" sizes="120x120" href="<?php echo URL::to_asset('/apple-touch-icon-120x120.png');?>">
-		<link rel="apple-touch-icon" sizes="76x76" href="<?php echo URL::to_asset('/apple-touch-icon-76x76.png');?>">
-		<link rel="apple-touch-icon" sizes="152x152" href="<?php echo URL::to_asset('/apple-touch-icon-152x152.png');?>">
 		<meta name="apple-mobile-web-app-title" content="Bugs">
-		<link rel="icon" type="image/png" href="<?php echo URL::to_asset('/favicon-196x196.png');?>" sizes="196x196">
-		<link rel="icon" type="image/png" href="<?php echo URL::to_asset('/favicon-160x160.png');?>" sizes="160x160">
-		<link rel="icon" type="image/png" href="<?php echo URL::to_asset('/favicon-96x96.png');?>" sizes="96x96">
-		<link rel="icon" type="image/png" href="<?php echo URL::to_asset('/favicon-16x16.png');?>" sizes="16x16">
-		<link rel="icon" type="image/png" href="<?php echo URL::to_asset('/favicon-32x32.png');?>" sizes="32x32">
+		<link rel="icon" type="image/ico" href="<?php echo URL::to_asset('/favicon.ico');?>">
 		<meta name="msapplication-TileColor" content="#39404f">
 		<meta name="msapplication-TileImage" content="<?php echo URL::to_asset('/mstile-144x144.png');?>">
 		<meta name="application-name" content="<?php Config::get('my_bugs_app.name'); ?>">
@@ -77,25 +65,13 @@ $EnLigne = false;
 
 			<nav class="nav-right">
 				<ul>
-				<?php
-					echo __('tinyissue.welcome').', <a href="'.URL::to('user/settings').'" class="user">'.Auth::user()->firstname.'</a></li>';
-					if (\Role\Permission::inherits_permission(array('reports-view','reports-create','project-create'))) {
-						echo '<li class="reports '.(($active == 'repprts') ? 'active' : '').'">';
-						echo '<a href="'.URL::to('projects/reports').'" ">'.__('tinyissue.report').'</a>';
-						echo '</li>';
-					}
-					if (Auth::user()->permission('administration')) {
-						echo '<li>';
-						echo '<a href="'.URL::to('administration/users').'">'.__('tinyissue.users').'</a>';
-						echo '</li>';
-						echo '<li>';
-						echo '<a href="'.URL::to('administration').'" '.$styleAdmin.'>'. __('tinyissue.administration').'</a>';
-						echo '</li>';
-					}
-					echo '<li class="logout">';
-					echo '<a href="'.URL::to('user/logout').'">'. __('tinyissue.logout').'</a>';
-					echo '</li>';
-				 ?>
+					<li><?php echo __('tinyissue.welcome');?>, <a href="<?php echo URL::to('user/settings'); ?>" class="user"><?php echo Auth::user()->firstname; ?></a></li>
+					<li class="reports <?php echo $active == 'repprts' ? 'active' : ''; ?>"><a href="<?php echo URL::to('projects/reports'); ?>" "><?php echo __('tinyissue.report');?></a></li>
+					<?php if(Auth::user()->permission('administration')): ?>
+					<li><a href="<?php echo URL::to('administration/users'); ?>"><?php echo __('tinyissue.users');?></a></li>
+					<li><a href="<?php echo URL::to('administration'); ?>" <?php echo $styleAdmin; ?>><?php echo __('tinyissue.administration');?></a></li>
+					<?php endif; ?>
+					<li class="logout"><a href="<?php echo URL::to('user/logout'); ?>"><?php echo __('tinyissue.logout');?></a></li>
 				</ul>
 			</nav>
 

@@ -2,7 +2,7 @@
 _IDE_HELPER.php
 config.app.php
 config.app.surete.php
-.DS_Store
+./**/.DS_Store
 README.md
 *.css~
 *.js~
@@ -16,4 +16,4 @@ app/vendor/Reports/BugsRepConfig.php
 app/storage/reports/*.pdf
 images/
 version
-
+.ddev

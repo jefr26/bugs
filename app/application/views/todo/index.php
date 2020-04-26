@@ -11,13 +11,13 @@
 
 	echo '<div class="pad" id="todo-lanes">';
 	foreach ($column as $col) {
-		echo '<div class="todo-lane blue-box" id="lane-status-'.$col.'" data-status="'.$col.'">';
+		echo '<div class="todo-lane blue-box lane-status-' . $col . '" id="lane-status-'.$col.'" data-status="'.$col.'">';
 		echo '<h4>'.$status_codes[$col].'('.$config_app['Percent'][$col].(($col == 0) ? '' :  ' - '.($config_app['Percent'][$col+1]-1)).'% )</h4>';
 		if (isset($lanes[$col])) {
 			foreach ($lanes[$col] as $lane) {
 				echo '<div class="todo-list-item '.(($col > 0) ? ' draggable' : '').'" id="todo-id-'.$lane->id.'" data-issue-id="'.$lane->id.'">';
 				echo '	<div class="todo-list-item-inner">';
-				echo '		<span><span style="color: '.$config_app['PriorityColors'][$lane->status].'; font-size: 200%;">&#9899;</span>#'. $lane->id.'</span>';
+				echo '		<span><span style="margin-right: 5px;color: '.$config_app['PriorityColors'][$lane->status].'; font-size: 104%;">&#9899;</span>#'. $lane->id.'</span>';
 				echo '			<a href="'.(\URL::to('project/' . $lane->project_id . '/issue/' . $lane->id)).'">'.$lane->title.'</a>&nbsp;<span>( '.$lane->weight.'%)</span>';
 				echo '			<a class="todo-button del" title="'. __('tinyissue.todos_remove').'" data-issue-id="'.$lane->id.'" href="#">[X]</a>';
 				echo '		<div>'.$lane->name.'</div>';
