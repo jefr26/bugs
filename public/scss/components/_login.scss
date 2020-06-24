@@ -1,0 +1,25 @@
+.login {
+  margin-top: 5rem;
+  padding: 1rem;
+  width: 30rem;
+  @include center-block;
+  & > h1 {
+    color: $yellow;
+  }
+  & > img {
+    width: 21.875rem;
+  }
+  & > form {
+    background-color: $white;
+    border-radius: $border-radius;
+    padding: 1.5rem;
+    & > .btn {
+      bottom: 1rem;
+      color: $white;
+      cursor: pointer;
+      position: absolute;
+      padding: .4rem 1rem;
+      right: 1.5rem;
+    }
+  }
+}

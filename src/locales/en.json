@@ -1,0 +1,9 @@
+{
+  "login": {
+    "welcome": "Welcome to",
+    "mail": "Email",
+    "password": "Password",
+    "remember": "Remember",
+    "submit": "Submit"
+  }
+}

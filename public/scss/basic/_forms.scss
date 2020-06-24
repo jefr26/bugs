@@ -1,0 +1,30 @@
+form {
+  padding: 1rem;
+  position: relative;
+  input[type="text"],
+  input[type="password"],
+  input[type="button"] {
+    border-radius: $border-radius;
+    font-size: .95rem;
+    &:focus {
+      outline: none;
+    }
+  }
+  input[type="text"],
+  input[type="password"] {
+    border: 1px solid $gray-500;
+    margin-bottom: 1rem;
+    padding: .7rem .4rem;
+    width: 100%;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+    &:focus {
+      background-color: $input-background;
+    }
+  }
+  input[type="button"] {
+    background-color: $blue;
+    border: 1px solid $button-border
+  }
+}
